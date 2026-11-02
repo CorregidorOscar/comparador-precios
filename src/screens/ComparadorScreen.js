@@ -1,41 +1,44 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { PRODUCTOS_INICIALES } from '../data/productos';
+import { cargarProductos, obtenerNombresUnicos } from '../controllers/ProductosController';
+import ListaProductos from '../components/ListaProductos';
 
 export default function ComparadorScreen() {
 
-    const [productos, setProductos] = useState(PRODUCTOS_INICIALES);
+  const [productos, setProductos] = useState(cargarProductos());
 
-    return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Comparador de Precios</Text>
-        <Text style={styles.subtitle}>
-          Negocios de Barrio ({productos.length} precios registrados)
-        </Text>
-      </View>
+  const productosUnicos = obtenerNombresUnicos(productos)
+
+  return (
+    <View style={styles.contenedor}>
+      <Text style={styles.titulo}>Comparador de Precios</Text>
+      <Text style={styles.subtitulo}>
+        Precios en negocios de barrio
+      </Text>
+      <ListaProductos
+        productosUnicos={productosUnicos}
+        productos={productos}
+      />
     </View>
-    );
+  );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contenedor: {
     flex: 1,
-  },
-  header: {
+    backgroundColor: '#F7F4EF',
+    paddingTop: 60,
     paddingHorizontal: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e1e4e8',
   },
-  title: {
-    fontSize: 24,
+  titulo: {
+    fontSize: 28,
     fontWeight: 'bold',
-    color: '#1a202c',
+    color: '#333333',
   },
-  subtitle: {
-    fontSize: 14,
-    color: '#718096',
-    marginTop: 4,
+  subtitulo: {
+    fontSize: 15,
+    color: '#777777',
+    marginTop: 5,
+    marginBottom: 20,
   },
 });

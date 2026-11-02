@@ -1,4 +1,4 @@
-export const PRODUCTOS_INICIALES = [
+const productosIniciales = [
  
   { id: 1, nombre: 'Yerba 1Kg', negocio: 'Despensa María', precio: 4800 },
   { id: 2, nombre: 'Yerba 1Kg', negocio: 'Supermercado Norte', precio: 5200 },
@@ -20,3 +20,7 @@ export const PRODUCTOS_INICIALES = [
   { id: 14, nombre: 'Aceite de Girasol 900cc', negocio: 'Supermercado Norte', precio: 3600 },
   { id: 15, nombre: 'Aceite de Girasol 900cc', negocio: 'Almacén Don José', precio: 4200 },
 ];
+
+export function obtenerProductos() {
+  return productosIniciales;
+}
