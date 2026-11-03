@@ -1,26 +1,42 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-export default function TarjetaProducto({ nombre, precios }) {
+export default function TarjetaProducto({ nombre, precios, seleccionado, onSeleccionar }) {
   return (
-    <View style={styles.tarjeta}>
-      <View style={styles.encabeado}>
-        <Text style={styles.nombre}>{nombre}</Text>
+    <Pressable
+      style={[
+          styles.tarjeta,
+          seleccionado && styles.tarjetaSeleccionada,
+        ]}
+      onPress={onSeleccionar}
+      accessibilityRole="button"
+      accessibilityLabel={`Consultar precios de ${nombre}`}
+    >
+        <View style={styles.encabeado}>
+          <View>
+          <Text style={styles.nombre}>{nombre}</Text>
+          <Text style={styles.accionTexto}>
+            {seleccionado ? 'Ocultar precios ▲' : 'Tocá para consultar precios ▼'}
+          </Text>
+        </View>
+
         <Text style={styles.cantidad}>
           {precios.length} comercios
         </Text>
-      </View>
+        </View>
 
-      <View style={styles.listaPrecios}>
-        {precios.map((item) => (
-          <View key={item.id} style={styles.filaPrecio}>
-            <Text style={styles.negocio}>{item.negocio}</Text>
-            <Text style={styles.precio}>
-              ${item.precio.toLocaleString('es-AR')}
-            </Text>
+        {seleccionado && (
+          <View style={styles.listaPrecios}>
+            {precios.map((item) => (
+              <View key={item.id} style={styles.filaPrecio}>
+                <Text style={styles.negocio}>{item.negocio}</Text>
+                <Text style={styles.precio}>
+                  ${item.precio.toLocaleString('es-AR')}
+                </Text>
+                </View>
+            ))}
           </View>
-        ))}
-      </View>
-    </View>
+      )}
+    </Pressable>
   );
 }
 
@@ -30,20 +46,26 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 12,
     marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'transparent',
+  },
+  tarjetaSeleccionada: {
+    borderColor: '#53745B',
   },
   encabezado: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
-    paddingBottom: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#EEEEEE',
   },
   nombre: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#333333',
+  },
+  accionTexto: {
+    fontSize: 12,
+    color: '#777777',
+    marginTop: 4,
   },
   cantidad: {
     fontSize: 12,
@@ -55,17 +77,21 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   listaPrecios: {
+    marginTop: 12,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#EEEEEE',
     gap: 6,
   },
   filaPrecio: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 2,
+    paddingVertical: 3,
   },
   negocio: {
     fontSize: 14,
-    color: '#777777',
+    color: '#555555',
   },
   precio: {
     fontSize: 15,

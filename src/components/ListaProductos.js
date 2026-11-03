@@ -5,6 +5,8 @@ import { obtenerPreciosPorProducto } from '../controllers/ProductosController';
 export default function ListaProductos({
   productosUnicos,
   productos,
+  productoSeleccionado,
+  onSeleccionarProducto,
 }) {
   if (productosUnicos.length === 0) {
     return (
@@ -15,18 +17,22 @@ export default function ListaProductos({
   }
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
       {productosUnicos.map((nombreProducto) => {
         const precios = obtenerPreciosPorProducto(
           productos,
           nombreProducto
         );
 
+        const estaSeleccinado = productoSeleccionado === nombreProducto;
+
         return (
           <TarjetaProducto
             key={nombreProducto}
             nombre={nombreProducto}
             precios={precios}
+            seleccionado={estaSeleccinado}
+            onSeleccionar={ () => onSeleccionarProducto(nombreProducto)}
           />
         );
       })}

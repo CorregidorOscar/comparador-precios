@@ -13,3 +13,15 @@ export function obtenerNombresUnicos(productos) {
 export function obtenerPreciosPorProducto(productos, nombreProducto) {
   return productos.filter((item) => item.nombre === nombreProducto);
 }
+
+export function filtrarProductosPorBusqueda(nombresUnicos, busqueda) {
+  const textoLimpio = busqueda.trim().toLowerCase();
+
+  if (!textoLimpio) {
+    return nombresUnicos;
+  }
+
+  return nombresUnicos.filter((nombre) =>
+    nombre.toLowerCase().includes(textoLimpio)
+  );
+}
