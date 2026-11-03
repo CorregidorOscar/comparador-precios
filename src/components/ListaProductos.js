@@ -1,6 +1,6 @@
 import { ScrollView, Text, StyleSheet } from 'react-native';
 import TarjetaProducto from './TarjetaProducto';
-import { obtenerPreciosPorProducto } from '../controllers/ProductosController';
+import { obtenerPreciosPorProducto, obtenerMenorPrecio } from '../controllers/ProductosController';
 
 export default function ListaProductos({
   productosUnicos,
@@ -24,6 +24,7 @@ export default function ListaProductos({
           nombreProducto
         );
 
+        const menorPrecio = obtenerMenorPrecio(precios);
         const estaSeleccinado = productoSeleccionado === nombreProducto;
 
         return (
@@ -31,6 +32,7 @@ export default function ListaProductos({
             key={nombreProducto}
             nombre={nombreProducto}
             precios={precios}
+            menorPrecio={menorPrecio}
             seleccionado={estaSeleccinado}
             onSeleccionar={ () => onSeleccionarProducto(nombreProducto)}
           />

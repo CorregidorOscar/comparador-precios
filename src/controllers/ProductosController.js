@@ -11,7 +11,7 @@ export function obtenerNombresUnicos(productos) {
 }
 
 export function obtenerPreciosPorProducto(productos, nombreProducto) {
-  return productos.filter((item) => item.nombre === nombreProducto);
+  return productos.filter((item) => item.nombre === nombreProducto).sort((a, b) => a.precio - b.precio);
 }
 
 export function filtrarProductosPorBusqueda(nombresUnicos, busqueda) {
@@ -24,4 +24,12 @@ export function filtrarProductosPorBusqueda(nombresUnicos, busqueda) {
   return nombresUnicos.filter((nombre) =>
     nombre.toLowerCase().includes(textoLimpio)
   );
+}
+
+export function obtenerMenorPrecio(preciosOrdenados) {
+ if (!preciosOrdenados || preciosOrdenados.length === 0) {
+    return null;
+  }
+
+  return preciosOrdenados[0];
 }

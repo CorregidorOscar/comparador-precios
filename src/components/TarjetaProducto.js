@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-export default function TarjetaProducto({ nombre, precios, seleccionado, onSeleccionar }) {
+export default function TarjetaProducto({ 
+  nombre, precios, menorPrecio, seleccionado, onSeleccionar 
+}) {
   return (
     <Pressable
       style={[
@@ -11,11 +13,11 @@ export default function TarjetaProducto({ nombre, precios, seleccionado, onSelec
       accessibilityRole="button"
       accessibilityLabel={`Consultar precios de ${nombre}`}
     >
-        <View style={styles.encabeado}>
-          <View>
+        <View style={styles.encabezado}>
+          <View style={styles.infoPrincipal}>
           <Text style={styles.nombre}>{nombre}</Text>
           <Text style={styles.accionTexto}>
-            {seleccionado ? 'Ocultar precios ▲' : 'Tocá para consultar precios ▼'}
+            {seleccionado ? 'Ocultar precios' : 'Tocá para consultar precios'}
           </Text>
         </View>
 
@@ -25,16 +27,48 @@ export default function TarjetaProducto({ nombre, precios, seleccionado, onSelec
         </View>
 
         {seleccionado && (
+        <View style={styles.detalleContenedor}>
+
+          {/* Lista completa */}
           <View style={styles.listaPrecios}>
-            {precios.map((item) => (
-              <View key={item.id} style={styles.filaPrecio}>
-                <Text style={styles.negocio}>{item.negocio}</Text>
-                <Text style={styles.precio}>
-                  ${item.precio.toLocaleString('es-AR')}
-                </Text>
+            {precios.map((item) => {
+              const esElMasBarato = menorPrecio && item.precio === menorPrecio.precio;
+
+              return (
+                <View
+                  key={item.id}
+                  style={[
+                    styles.filaPrecio,
+                    esElMasBarato && styles.filaMasBarata,
+                  ]}
+                >
+                  <View style={styles.negocioContenedor}>
+                    <Text
+                      style={[
+                        styles.negocio,
+                        esElMasBarato && styles.textoMasBarato,
+                      ]}
+                    >
+                      {item.negocio}
+                    </Text>
+                    {esElMasBarato && (
+                      <Text style={styles.badgeMejor}>Más barato</Text>
+                    )}
+                  </View>
+
+                  <Text
+                    style={[
+                      styles.precio,
+                      esElMasBarato && styles.textoMasBarato,
+                    ]}
+                  >
+                    ${item.precio.toLocaleString('es-AR')}
+                  </Text>
                 </View>
-            ))}
+              );
+            })}
           </View>
+        </View>
       )}
     </Pressable>
   );
@@ -57,6 +91,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  infoPrincipal: {
+    flex: 1,
+    marginRight: 10,
+  },
   nombre: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -76,18 +114,30 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontWeight: '600',
   },
-  listaPrecios: {
+  detalleContenedor: {
     marginTop: 12,
-    paddingTop: 10,
+    paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: '#EEEEEE',
+  },
+  listaPrecios: {
     gap: 6,
   },
   filaPrecio: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 3,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    borderRadius: 6,
+  },
+  filaMasBarata: {
+    backgroundColor: '#F7FAF8',
+  },
+  negocioContenedor: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   negocio: {
     fontSize: 14,
@@ -95,7 +145,20 @@ const styles = StyleSheet.create({
   },
   precio: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: '600',
+    color: '#333333',
+  },
+  textoMasBarato: {
     color: '#53745B',
+    fontWeight: 'bold',
+  },
+  badgeMejor: {
+    fontSize: 10,
+    color: '#FFFFFF',
+    backgroundColor: '#53745B',
+    paddingVertical: 2,
+    paddingHorizontal: 6,
+    borderRadius: 4,
+    fontWeight: 'bold',
   },
 });
