@@ -1,4 +1,4 @@
-import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function BuscadorProducto({ busqueda, setBusqueda }) {
   return (
@@ -11,10 +11,7 @@ export default function BuscadorProducto({ busqueda, setBusqueda }) {
       />
 
       {busqueda.length > 0 && (
-        <Pressable
-          style={styles.botonLimpiar}
-          onPress={() => setBusqueda('')}
-        >
+        <Pressable style={styles.botonLimpiar} onPress={() => setBusqueda("")}>
           <Text style={styles.textoLimpiar}>Limpiar</Text>
         </Pressable>
       )}
@@ -24,31 +21,31 @@ export default function BuscadorProducto({ busqueda, setBusqueda }) {
 
 const styles = StyleSheet.create({
   contenedor: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     padding: 12,
     borderRadius: 12,
     marginBottom: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 8,
   },
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: '#DDDDDD',
+    borderColor: "#DDDDDD",
     borderRadius: 8,
     padding: 10,
     fontSize: 15,
   },
   botonLimpiar: {
-    backgroundColor: '#E7EFE8',
+    backgroundColor: "#E7EFE8",
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 8,
   },
   textoLimpiar: {
-    color: '#53745B',
+    color: "#53745B",
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 });

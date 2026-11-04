@@ -1,21 +1,23 @@
+// Las lineas comentadas son para realizar pruebas donde hay algun/ ningun negocio/s con todos los
+// productos para lista de compra
 const productosIniciales = [
-  { id: 1, nombre: 'Yerba 1Kg', negocio: 'Despensa María', precio: 3850 },
+  // { id: 1, nombre: 'Yerba 1Kg', negocio: 'Despensa María', precio: 3850 },
   { id: 2, nombre: 'Yerba 1Kg', negocio: 'Supermercado Norte', precio: 4950 },
   { id: 3, nombre: 'Yerba 1Kg', negocio: 'Almacén Don José', precio: 4400 },
   { id: 4, nombre: 'Yerba 1Kg', negocio: 'Mayorista El Sol', precio: 4600 },
 
   { id: 5, nombre: 'Leche 1L', negocio: 'Despensa María', precio: 1950 },
   { id: 6, nombre: 'Leche 1L', negocio: 'Supermercado Norte', precio: 1650 },
-  { id: 7, nombre: 'Leche 1L', negocio: 'Almacén Don José', precio: 1650 },
+  // { id: 7, nombre: 'Leche 1L', negocio: 'Almacén Don José', precio: 1650 },
   { id: 8, nombre: 'Leche 1L', negocio: 'Mayorista El Sol', precio: 2100 },
 
   { id: 9, nombre: 'Fideos 500g', negocio: 'Despensa María', precio: 1350 },
   { id: 10, nombre: 'Fideos 500g', negocio: 'Supermercado Norte', precio: 1500 },
   { id: 11, nombre: 'Fideos 500g', negocio: 'Almacén Don José', precio: 980 },
-  { id: 12, nombre: 'Fideos 500g', negocio: 'Mayorista El Sol', precio: 1200 },
+  // { id: 12, nombre: 'Fideos 500g', negocio: 'Mayorista El Sol', precio: 1200 },
 
   { id: 13, nombre: 'Azúcar 1Kg', negocio: 'Despensa María', precio: 1550 },
-  { id: 14, nombre: 'Azúcar 1Kg', negocio: 'Supermercado Norte', precio: 1650 },
+  // { id: 14, nombre: 'Azúcar 1Kg', negocio: 'Supermercado Norte', precio: 1650 },
   { id: 15, nombre: 'Azúcar 1Kg', negocio: 'Almacén Don José', precio: 1450 },
   { id: 16, nombre: 'Azúcar 1Kg', negocio: 'Mayorista El Sol', precio: 1250 },
 
